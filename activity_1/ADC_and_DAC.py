@@ -33,13 +33,15 @@ def ADC():
 
     # Sampled signal.
     plt.subplot(312)
-    plt.plot(t_sample, sine_signal(t_sample), "ro", alpha=0.5)
+    plt.plot(t_sample, sampled_values, "ro", alpha=0.5)
     plt.vlines(t_sample, 0, sampled_values, "r")
     plt.title("Sampled signal")
 
+    quantized_values = convert_to_digital(sampled_values)
     # We asume we use an 8 bit adc and we add a zero order hold.
     plt.subplot(313, ylim=(0, 1024))
-    plt.step(t_sample, convert_to_digital(sampled_values), "r", where="post")
+    plt.plot(t_sample, quantized_values, "ro", alpha=0.5)
+    plt.vlines(t_sample, 0, quantized_values, "r")
     plt.title("ADC output")
 
 
